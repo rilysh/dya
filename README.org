@@ -1,0 +1,44 @@
+** dya
+A tiny dynamic memory allocator.
+
+** Example
+#+begin_src c
+#include <stdio.h>
+#include <string.h>
+
+#include "dya.h"
+
+int main(void)
+{
+	struct dya dya;
+
+	memset(&dya, '\0', sizeof(struct dya));
+
+	dya_init(&dya);
+	dya_push(&dya, "Hello world");
+	dya_push(&dya, "Now is the winter of our discontent");
+	dya_push(&dya, "Made glorious summer by this sun of York;");
+	dya_push(&dya, "And all the clouds that lour'd upon our house");
+	dya_push(&dya, "In the deep bosom of the ocean buried.");
+	dya_push(&dya, "Now are our brows bound with victorious wreaths;");
+	dya_push(&dya, "Our bruised arms hung up for monuments;");
+	dya_push(&dya, "Our stern alarums changed to merry meetings,");
+	dya_push(&dya, "Our dreadful marches to delightful measures.");
+	dya_push(&dya, "Grim-visaged war hath smooth'd his wrinkled front;");
+	dya_push(&dya, "And now, instead of mounting barded steeds");
+	dya_push(&dya, "To fright the souls of fearful adversaries,");
+	dya_push(&dya, "He capers nimbly in a lady's chamber");
+	dya_push(&dya, "To the lascivious pleasing of a lute.");
+	dya_push(&dya, "But I, that am not shaped for sportive tricks,");
+	dya_push(&dya, "Nor made to court an amorous looking-glass;");
+	dya_push(&dya, "I, that am rudely stamp'd, and want love's majesty");
+	dya_push(&dya, "To strut before a wanton ambling nymph;");
+
+	fprintf(stdout, "%s\n", (char *)dya.ptr);
+	dya_free(&dya);
+}
+#+end_src
+
+** Other notes
+For your purpose, you should modify the pre-allocation size.
+The default size is (4098 * 18) or 73764 bytes.
